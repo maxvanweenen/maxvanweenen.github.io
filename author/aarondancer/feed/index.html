@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Aaron Dancer &#187; aarondancer</title>
+	<atom:link href="http://aarondancer.com/author/aarondancer/feed/" rel="self" type="application/rss+xml" />
+	<link>http://aarondancer.com</link>
+	<description></description>
+	<lastBuildDate>Mon, 23 Nov 2015 19:03:17 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	
+	<item>
+		<title>Making an event registration and checkin system using Meteor</title>
+		<link>http://aarondancer.com/2015/11/20/making-event-registration-checkin-system-using-meteor/</link>
+		<comments>http://aarondancer.com/2015/11/20/making-event-registration-checkin-system-using-meteor/#comments</comments>
+		<pubDate>Fri, 20 Nov 2015 16:49:57 +0000</pubDate>
+		<dc:creator><![CDATA[aarondancer]]></dc:creator>
+				<category><![CDATA[Web Development]]></category>
+
+		<guid isPermaLink="false">http://aarondancer.com/?p=6363</guid>
+		<description><![CDATA[<p>Making an event registration and checking system using Meteor 0&#46; What is Meteor? Meteor is a framework that allows you to quickly create real-time websites, web apps, mobile apps, and more all using full stack JavaScript! 1&#46; Installing Meteor Just go to https://www.meteor.com/install and follow the instructions! 2&#46; Hello World Creating your first app Let&#8217;s [&#8230;]</p>
+<p>The post <a rel="nofollow" href="http://aarondancer.com/2015/11/20/making-event-registration-checkin-system-using-meteor/">Making an event registration and checkin system using Meteor</a> appeared first on <a rel="nofollow" href="http://aarondancer.com">Aaron Dancer</a>.</p>
+]]></description>
+				<content:encoded><![CDATA[<h1>Making an event registration and checking system using Meteor</h1>
+<h2>0&#46; What is Meteor?</h2>
+<p>Meteor is a framework that allows you to quickly create real-time websites, web apps, mobile apps, and more all using full stack JavaScript!</p>
+<h2>1&#46; Installing Meteor</h2>
+<p>Just go to https://www.meteor.com/install and follow the instructions!</p>
+<h2>2&#46; Hello World</h2>
+<h3>Creating your first app</h3>
+<p>Let&#8217;s create our first app in Meteor! To save time, let&#8217;s go ahead and name it &#8216;hackathon-system&#8217; so we can recycle the project when we&#8217;re done.</p>
+<p>To create a new app in Meteor, just open up your Terminal or Powershell and type the following: <code>meteor create hackathon-system</code></p>
+<p>That will create a new folder called <code>hackathon-system</code> with the following files inside of it:</p>
+<p><code>hackathon-system.js<br />
+hackathon-system.html<br />
+hackathon-system.css<br />
+.meteor</code></p>
+<h3>Running your first app</h3>
+<p>Let&#8217;s go ahead and run our newly generated app by typing: <code>cd hackathon-system<br />
+meteor</code></p>
+<p>Once it&#8217;s done loading, visit http://localhost:3000 and you&#8217;ll see a screen like this show up:</p>
+<p><img src="https://i.imgur.com/jH7tvVX.png" alt="" /></p>
+<p>Click the <code>Click Me</code> button and you&#8217;ll notice the number increments. There&#8217;s nothing really magical about this, this is just the Blaze templating engine doing some basic JavaScript.</p>
+<h2>3&#46; Setting up the view</h2>
+<p>With Blaze, views are made with HTML and custom tags that the Blaze will recognize. Go ahead and open up your <code>hackathon-system.html</code> file and make add the following changes:</p>
+<p>Change <code>&lt;title&gt;hackathon-system&lt;/title&gt;</code> to <code>&lt;title&gt;Hackathon System&lt;/title&gt;</code></p>
+<p>Remove everything inside <code>&lt;body&gt;...&lt;/body&gt;</code> and <code>&lt;template name="hello&gt;...&lt;/template&gt;</code></p>
+<p>Now add a header inside <code>&lt;body&gt;</code> like so:</p>
+<p><code>&lt;body&gt;<br />
+    &lt;header&gt;<br />
+        &lt;h1&gt;Hackathon System&lt;/h1&gt;<br />
+    &lt;/header&gt;<br />
+&lt;/body&gt;</code></p>
+<h2>4&#46; Display attendees</h2>
+<h3>Creating the template</h3>
+<p>The first thing we need to do in order to display attendees is to create a template for attendees. This template will define how every attendee will be displayed on the screen.</p>
+<p>Change <code>name="hello"</code> to <code>name="attendee"</code> in <code>&lt;template&gt;</code>. This will be our attendee template.</p>
+<p>Now we define the template&#8217;s content:</p>
+<p><code>&lt;template name="attendee"&gt;<br />
+    &lt;div&gt;<br />
+        &lt;div&gt;{{status}}&lt;/div&gt;<br />
+        &lt;div&gt;&lt;b&gt;{{name}}&lt;b&gt;&lt;/div&gt;<br />
+        &lt;div&gt;{{email}}&lt;/div&gt;<br />
+    &lt;/div&gt;<br />
+&lt;/template&gt;</code></p>
+<p>In short, what we just did was have the template display the status, name, and email of the attendee, wrapped within a div container.</p>
+<h3>Displaying the template</h3>
+<p>Now that we have the template, we need to tell the view to display the template for every attendee that exists. We do this by adding the following before the header we made earlier:</p>
+<p><code>&lt;div&gt;<br />
+    {{#each attendees}}<br />
+        {{&gt; attendee}}<br />
+    {{/each}}<br />
+&lt;/div&gt;</code></p>
+<h3>Sample Data</h3>
+<p>Now if you load up the app, you&#8217;ll notice that it&#8217;s empty! Why? because there&#8217;s no attendees to pull from! Let&#8217;s go ahead and add some attendees. We&#8217;ll just hardcode this into the client for now.</p>
+<p>Open up your <code>hackathon-system.js</code> file and add delete everything inside the <code>if (meteor.isClient) {...}</code> brackets.</p>
+<p>Now, add the following:</p>
+<p><code>Template.body.helpers({<br />
+        attendees: [<br />
+            { name: 'Bob Jones', email: 'bob@jones.com', status: 'Checked-in'},<br />
+            { name: 'Tiffany Williams', email:'tiff@any.com', status: 'Registered' }<br />
+        ]<br />
+    });</code></p>
+<p>What we just did is insert code into the client (the browser) that gives the body access to the hardcoded attendees array we created inside it. In that array we created two JavaScript objects with a name and email.</p>
+<p>Now, go back to your Meteor app and you&#8217;ll see that your code has magically been updated to show the two attendees you just hardcoded in!</p>
+<p><img src="https://i.imgur.com/3mJYIbo.png" alt="" /></p>
+<p>Go ahead and try renaming someone or changing an email. You&#8217;ll notice that it gets updated automagically. This is thanks to Meteor&#8217;s hot-reload.</p>
+<p>You have successfully displayed your attendees using Blaze! Now let&#8217;s make it prettier.</p>
+<h2>5&#46; Making it prettier</h2>
+<h3>Installing Bootstrap</h3>
+<p>One of the easiest ways to get your apps looking decent quickly is to use a front-end framework called Bootstrap. In order for us to use Bootstrap, you&#8217;ll get to witness the magic of the Meteor package system.</p>
+<p>All you have to do to install Bootsrap into Meteor is type this into your console: <code>meteor add twbs:bootstrap</code></p>
+<p>That&#8217;s it!</p>
+<h3>Adding some formatting and classes</h3>
+<p>In order to style and structure a view properly, you need to use classes.</p>
+<p>Let&#8217;s wrap everything inside the body with a <code>&lt;div&gt;</code> that has the Bootstrap <code>container</code> class. What this class will do is wrap what we have into a padded container. The result should look similar to this:</p>
+<p><code>&lt;div class="container"&gt;<br />
+    &lt;header&gt;<br />
+        ...<br />
+    &lt;/header&gt;<br />
+    &lt;div&gt;<br />
+        ...<br />
+    &lt;/div&gt;<br />
+&lt;/div&gt;</code></p>
+<p>Now, let&#8217;s format the attendees to where they show up as cards in a grid format. I won&#8217;t be doing much explaining about the Bootstrap grid here, if you want to learn it in detail visit here: http://getbootstrap.com/css/#grid</p>
+<p>First we need to edit the template. I so that each card has a defined width. For the <code>&lt;div&gt;</code> tag inside, we&#8217;ll add some classes like so:</p>
+<p><code>&lt;div class="col-xs-6 col-sm-4 col-md-3 col-lg-2"&gt;<br />
+    ...<br />
+&lt;/div&gt;</code></p>
+<p>These classes basically defines the <code>&lt;div&gt;</code> as a container that determines how wide each card should be depending on screen width.</p>
+<p>Now we need to wrap everything we have with a <code>&lt;div&gt;</code> that will act as the styling layer of the card:</p>
+<p><code>&lt;div class="col-xs-6 col-sm-4 col-md-3 col-lg-2"&gt;<br />
+    &lt;div class="card"&gt;<br />
+        ...<br />
+    &lt;/div&gt;<br />
+&lt;/div&gt;</code></p>
+<p>Now to finish off the attendee grid, we need to go back into our body and edit the <code>&lt;div&gt;</code> below the <code>&lt;body&gt;</code> and tell it to wrap all of the templates by giving it the <code>row</code> class:</p>
+<p><code>&lt;header&gt;<br />
+    ...<br />
+&lt;/header&gt;<br />
+&lt;div class="row"&gt;<br />
+    ...<br />
+&lt;/div&gt;</code></p>
+<p>Now if you look at the page, you&#8217;ll notice that the attendees will be aligned and spaced out, but they don&#8217;t quite look like cards yet.</p>
+<h3>Adding some custom styling</h3>
+<p>Let&#8217;s add some basic custom styling to make the attendees look like cards. Open up your <code>hackthon-system.css</code> file and type the following:</p>
+<p><code>.card {<br />
+    padding: 16px;<br />
+    border: 1px solid #ccc;<br />
+    border-radius: 8px;<br />
+    margin: 8px;<br />
+    width: 100%;<br />
+}</code></p>
+<p>This should style the cards to look like this: <img src="https://i.imgur.com/UIaJNBL.png" alt="" /></p>
+<p>Not bad eh? But how about we make the status more prominent?</p>
+<h3>Status Tag</h3>
+<p>Go back to your template and edit the status tag to look like this:</p>
+<p><code>&lt;div class="card"&gt;<br />
+    &lt;div class="{{status}} status"&gt;<br />
+        {{status}}<br />
+    &lt;/div&gt;<br />
+    ...<br />
+&lt;/div&gt;</code></p>
+<p>Woah. Okay. There&#8217;s Blaze tags in the class? Yep! You can do that. That&#8217;s how we&#8217;ll make the tag change color based on the status. I also added a plain <code>status</code> tag to act as the base styling.</p>
+<p>Now let&#8217;s add some custom CSS:</p>
+<p>&#96;<code>\</code> .card .status { border: 1px solid #ccc; border-radius: 4px; padding: 2px; background: #eee; padding-left: 8px; }</p>
+<p>.card .Checked-in { border-color: #0a0; background: #8c8; }</p>
+<p>.card .Registered { border-color: #a90; background: #fe9; } &#96;<code>\</code></p>
+<p>So we have our base <code>status</code> styling, then styles for <code>Checked-in</code> and <code>Registered</code>.</p>
+<p>Let&#8217;s see how it looks: <img src="https://i.imgur.com/zgC52mr.png" alt="" /></p>
+<p>Pretty spiffy!</p>
+<h2>6&#46; Registering someone</h2>
+<p>Okay okay, that&#8217;s enough making it pretty. Let&#8217;s get coding. We&#8217;ve hardcoded attendees, let&#8217;s make this for real and have it pull data from the server.</p>
+<h3>Defining a collection</h3>
+<p>Remember that array of attendees we made earlier? That was our attendee collection, but it was only available to the client. We need to make a collection that&#8217;s available to the server and the client like so:</p>
+<p>&#96;<code>\</code> Attendees = new Mongo.Collection(&#8220;attendees&#8221;);</p>
+<p>if (Meteor.isClient) { Template.body.helpers({ attendees: function () { return Attendees.find({}); } } } &#96;<code>\</code></p>
+<p>So what did we do? We created a MongoDB collection outside of the Client and Server scope. This makes the collection global to both the Client and Server code. Then we modified the helper to just return the <code>Attendees</code> collection we made to the client.</p>
+<h3>Adding an attendee manually</h3>
+<p>Now, let&#8217;s try manually entering in some data into our databse. Access the MongoDB console by going into your terminal and typing: <code>meteor mongo</code></p>
+<p>Then, run this query to insert a new attendee into the database: <code>db.attendees.insert({ name: 'Richard Hillary', email: 'rich@one.com', status: 'Registered' });</code></p>
+<p>Basically you&#8217;re just inserting an attendee object, similar to the ones you hardcoded before into the <code>attendees</code> collection in the database.</p>
+<p>Now, if you look at your app you should see your new attendee!</p>
+<p><img src="https://i.imgur.com/VW1SqJi.png" alt="" /></p>
+<h3>Adding a form</h3>
+<p>Alright alright, so maybe we need a button. We&#8217;ll also need some fields for people to enter their information. Go back into your html and add the following above <code>&lt;div class="row"&gt;</code>:</p>
+<p><code>&lt;form class="register form-inline"&gt;<br />
+    &lt;div class="form-group"&gt;<br />
+        &lt;input class="form-control" type="text" name="name" placeholder="Name"&gt;<br />
+        &lt;input class="form-control" type="email" name="email" placeholder="Email"&gt;<br />
+        &lt;button class="btn btn-primary" type="submit"&gt;Register&lt;/button&gt;<br />
+    &lt;/div&gt;<br />
+&lt;/form&gt;</code></p>
+<p>This code creates a form, two fields, and a submit button. We identify the form by its <code>register</code> class. It should look like this:</p>
+<p><img src="https://i.imgur.com/3AGq3zB.png" alt="" /></p>
+<p>Now that we have our form, let&#8217;s have that form add that person to the database when they click <code>Register</code></p>
+<p>Within <code>if (Meteor.isClient) {...}</code> type out the following:</p>
+<p>&#96;<code>\</code> Template.body.events({ &#8220;submit .register&#8221;: function (event) { //Prevent the page from reloading event.preventDefault();</p>
+<pre><code>    var name = event.target.name.value;
+    var email = event.target.email.value;
+
+    Attendees.insert({
+        name: name,
+        email: email,
+        status: 'Registered'
+    })
+
+    //Clear the text boxes
+    event.target.name.value = "";
+    event.target.email.value = "";
+}
+</code></pre>
+<p>}) &#96;<code>\</code></p>
+<p>This code will take what&#8217;s inputed in the textboxes and create a new registered attendee in the database.</p>
+<p>Try to add someone! You&#8217;ll notice that person will instantly show up on the screen and in the database.</p>
+<h3>Basic Validation</h3>
+<p>Wait a minute, if you try to add someone with a blank field, it works. You can also add duplicate people. We should check to see if the fields are blank and if the email already exists.</p>
+<p>Checking if fields are empty is actually really easy to do. All you have to do is wrap the insert and clear text code with a conditional that checks if the value of the fields are empty.</p>
+<p>&#96;<code>\</code> if (name !== &#8220;&#8221; &amp;&amp; email !== &#8220;&#8221;) { Attendees.insert({ name: name, email: email, status: &#8216;Registered&#8217; })</p>
+<pre><code>event.target.name.value = "";
+event.target.email.value = "";
+</code></pre>
+<p>} &#96;<code>\</code></p>
+<p>Now let&#8217;s implement a check to see if an email already exists:</p>
+<p><code>if (Attendees.find({ email: email }).count() &gt; 0) {<br />
+    return<br />
+}</code></p>
+<p>All we do is search for attendees with the same email and get a count of how many matches there are.</p>
+<h2>7&#46; Checking someone in</h2>
+<p>Now that registration is working, and we have some basic validation, let&#8217;s get someone checked in.</p>
+<p>How about rather than making a separate button to check someone in, you just click their status to check in and out!</p>
+<p>This is pretty simple:</p>
+<p>&#96;<code>\</code> &#8220;submit .register&#8221;: function (event) { &#8230; }, // &lt;&#8211; Make sure you add a comma</p>
+<p>&#8220;click .status&#8221;: function () { Attendees.update(this._id, { $set: {status: (this.status === &#8220;Registered&#8221;) ? &#8220;Checked-in&#8221; : &#8220;Registered&#8221;} }); } &#96;<code>\</code></p>
+<p>Now click the statuses and you&#8217;ll notice they&#8217;ll toggle! Pretty easy eh?</p>
+<h2>9&#46; Hiding checked-in people</h2>
+<p>What if we want to hide the attendees that are checked in?</p>
+<p>Let&#8217;s add a checkbox below our form:</p>
+<p><code>&lt;input type="checkbox" name="toggle-checked-in" class="toggle-checked-in" checked="{{hideCheckedIn}}"&gt;<br />
+&lt;label for="toggle-checked-in"&gt;Toggle checked in&lt;/label&gt;</code></p>
+<p>What this checkbox will do is set its checked state to the <code>hideCheckedIn</code> session variable.</p>
+<p>Now, let&#8217;s add the logic. Add another event, this time for the <code>change</code> event on the checkbox:</p>
+<p><code>"change .toggle-checked-in": function(event) {<br />
+      Session.set("hideCheckedIn", event.target.checked);<br />
+}</code></p>
+<p>This will toggle the <code>hideCheckedIn</code> variable.</p>
+<p>Now, in the helpers add a hideCheckedIn helper that returns the session variable:</p>
+<p><code>attendees: function () {<br />
+      ...<br />
+},<br />
+hideCheckedIn: function() {<br />
+      return Session.get("hideCheckedIn");<br />
+}</code></p>
+<p>But, if you check the box you&#8217;ll notice that the checked-in people don&#8217;t hide. We&#8217;ll need to tell the attendees helper to filter out those people if the checkbox is checked:</p>
+<p><code>if (Session.get("hideCheckedIn")) {<br />
+    return Attendees.find({status: 'Registered'});<br />
+}<br />
+return Attendees.find({});</code></p>
+<h2>9&#46; User Accounts</h2>
+<p>Now, we don&#8217;t want this to be accessible by anyone right? Let&#8217;s only allow logged in people to register and check in people. But how do we do that? Well in Meteor it&#8217;s simple!</p>
+<p>First install the <code>accounts-ui</code> and <code>accounts-password</code> packages:</p>
+<p><code>meteor add accounts-ui accounts-password</code></p>
+<p>Then, above our form add the following code to add a login dropdown above our form:</p>
+<p><code>{{&gt; loginButtons}}</code></p>
+<p>Let&#8217;s also have it require a username instead of an email by placing this at the bottom of the Meteor client:</p>
+<p><code>Accounts.ui.config({<br />
+    passwordSignupFields: "USERNAME_ONLY"<br />
+});</code></p>
+<p>Now we need to add some validation that tells your code to stop and throw an error if the user isn&#8217;t logged in. Add this inside all of your events:</p>
+<p><code>if (!Meteor.userId()) {<br />
+    throw new Meteor.Error("not-authorized")<br />
+}</code></p>
+<p>But this isn&#8217;t enough, users can still see the fields and attendees. We can hide all of that by wrapping it all in the following tags.</p>
+<p><code>{{#if currentUser}}<br />
+{{/if}}</code></p>
+<h2>10&#46; Security</h2>
+<p>Now that we have authentication, we need to make sure our app is actually secure. By default Meteor is insecure, and we need to make some changes to our code.</p>
+<p>First, we need to remove the unsubscribe package:</p>
+<p><code>meteor remove insecure</code> This prevents people from executing MongoDB queries from the client.</p>
+<p>Next, we need to move modifying queries out of the client and into the server. We do this by declaring <code>Meteor.methods</code>.</p>
+<p>Below the server contitional, add another block for <code>Meteor.methods</code> like so:</p>
+<p>&#96;<code>\</code> Meteor.methods({</p>
+<p>}); &#96;<code>\</code></p>
+<p>Let&#8217;s start moving our methods. Move all of the validation and queries in <code>register</code> to a new <code>register</code> method in <code>Meteor.methods</code>:</p>
+<p><code>Meteor.methods({<br />
+    register: function(name, email) {<br />
+        if (!Meteor.userId()) {<br />
+        throw new Meteor.Error("not-authorized")<br />
+        }<br />
+        Attendees.insert({<br />
+            name: name,<br />
+            email: email,<br />
+            status: 'Registered'<br />
+        })<br />
+    }<br />
+});</code></p>
+<p>Now, just do the same for the check-in event.</p>
+<h2>11&#46; Deploy to Meteor</h2>
+<p>Believe it or not, we have a fully functioning app!</p>
+<p>You can deploy your app using the command: <code>meteor deploy your_app_name.meteor.com</code></p>
+<p>Then you can visit it at https://your_app_name.meteor.com</p>
+<p>It&#8217;s completely free! Just not that this is only good for testing, Meteor will shutdown inactive sites and there&#8217;s no control over hosting.</p>
+<h2>12&#46; What&#8217;s next?</h2>
+<p>This app was made to demonstrate the basic capabilities of Meteor. The app&#8217;s architecture completely ignores Meteor&#8217;s awesome user accounts API for the sake of getting down some basic concepts.</p>
+<p>Things to work on:</p>
+<ul>
+<li>Remove auto-publish. Use publish and subscribe instead.</li>
+<li>Make it a multipage app!</li>
+<li>Make it mobile!</li>
+<li>Deploy to a real production environment (like Azure)</li>
+</ul>
+<p>The post <a rel="nofollow" href="http://aarondancer.com/2015/11/20/making-event-registration-checkin-system-using-meteor/">Making an event registration and checkin system using Meteor</a> appeared first on <a rel="nofollow" href="http://aarondancer.com">Aaron Dancer</a>.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://aarondancer.com/2015/11/20/making-event-registration-checkin-system-using-meteor/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+		<item>
+		<title>Accessing Environment Variables on an Azure Web App in PHP</title>
+		<link>http://aarondancer.com/2015/08/16/accessing-environment-variables-on-an-azure-web-app-in-php/</link>
+		<comments>http://aarondancer.com/2015/08/16/accessing-environment-variables-on-an-azure-web-app-in-php/#comments</comments>
+		<pubDate>Sun, 16 Aug 2015 23:28:36 +0000</pubDate>
+		<dc:creator><![CDATA[aarondancer]]></dc:creator>
+				<category><![CDATA[Azure]]></category>
+		<category><![CDATA[Microsoft]]></category>
+		<category><![CDATA[PHP]]></category>
+		<category><![CDATA[Web Development]]></category>
+		<category><![CDATA[azure]]></category>
+		<category><![CDATA[azure web app]]></category>
+		<category><![CDATA[php]]></category>
+		<category><![CDATA[web]]></category>
+		<category><![CDATA[web app]]></category>
+
+		<guid isPermaLink="false">http://adancerwp.azurewebsites.net/?p=6121</guid>
+		<description><![CDATA[<p>TLDR; If you want to access environment variables set on your Azure Web App in PHP, usegetenv(). Example below: $api_key = getenv('ENVVARNAME'); While working on the contact form for my personal website, I ran into issues with accessing environment variables I had set in my Azure Web App. When building my contact form I decided [&#8230;]</p>
+<p>The post <a rel="nofollow" href="http://aarondancer.com/2015/08/16/accessing-environment-variables-on-an-azure-web-app-in-php/">Accessing Environment Variables on an Azure Web App in PHP</a> appeared first on <a rel="nofollow" href="http://aarondancer.com">Aaron Dancer</a>.</p>
+]]></description>
+				<content:encoded><![CDATA[<p><strong>TLDR;</strong> If you want to access environment variables set on your Azure Web App in PHP, use<code>getenv()</code>. Example below:</p>
+<p><code>$api_key = getenv('ENVVARNAME');</code></p>
+<p>While working on the contact form for my <a href="http://aarondancer.com/" target="_blank">personal website</a>, I ran into issues with accessing environment variables I had set in my Azure Web App.</p>
+<p>When building my contact form I decided to use SendGrid to power it (which I purchased from the Azure Marketplace). In order to use the SendGrid API I needed to include the API keys and login credentials. It&#8217;s very bad practice to include these keys in your source code (especially when open source like my website), so I added some environment variables in the configuration section of my Azure Web App.</p>
+<p><a href="http://adancerwp.azurewebsites.net/wp-content/uploads/2015/08/Azure-App-Settings.png"><img class="aligncenter wp-image-6131 size-full" src="http://adancerwp.azurewebsites.net/wp-content/uploads/2015/08/Azure-App-Settings.png" alt="Azure App Settings" width="1782" height="428" /></a></p>
+<p>Since these variables are set for the whole app, I figured they were global. So I tried accessing them like so: <code>$_ENV["SGUSER"]</code>. However, after much testing I found that accessing them with <code>$_ENV</code> would yield nothing. I tested with <code>$_SERVER</code> as well with the same result. So, after a bit of searching on Bing I found the <a href="http://php.net/manual/en/function.getenv.php"><code>getenv()</code></a> function. This seemed to do the trick!</p>
+<p>The post <a rel="nofollow" href="http://aarondancer.com/2015/08/16/accessing-environment-variables-on-an-azure-web-app-in-php/">Accessing Environment Variables on an Azure Web App in PHP</a> appeared first on <a rel="nofollow" href="http://aarondancer.com">Aaron Dancer</a>.</p>
+]]></content:encoded>
+			<wfw:commentRss>http://aarondancer.com/2015/08/16/accessing-environment-variables-on-an-azure-web-app-in-php/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+		</item>
+	</channel>
+</rss>
+
+<!-- Dynamic page generated in 1.012 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2016-09-07 15:09:38 -->

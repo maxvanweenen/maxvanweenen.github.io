@@ -1,0 +1,612 @@
+<!doctype html>
+
+<!--[if IE 8]><html class="ie8 ie-all" lang="en-US" prefix="og: http://ogp.me/ns#"> <![endif]-->
+<!--[if IE 9]><html class="ie9 ie-all" lang="en-US" prefix="og: http://ogp.me/ns#"> <![endif]-->
+<!--[if IE 10]><html class="ie10 ie-all" lang="en-US" prefix="og: http://ogp.me/ns#"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en-US" prefix="og: http://ogp.me/ns#"><!--<![endif]-->
+
+    
+<!-- Mirrored from aarondancer.com/2015/11/20/making-event-registration-checkin-system-using-meteor/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 07 Sep 2016 15:02:26 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+        <meta charset="UTF-8">
+
+        <title>Making an event registration and checkin system using Meteor - Aaron Dancer</title>
+
+                <meta name="author" content="IshYoBoy.com">
+
+        <meta name="viewport" content="width=device-width">
+
+        <!-- Place favicon.ico and apple-touch-icon.png (72x72) in the root directory -->
+        
+        <!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame -->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+        <!-- HTML5 enabling script -->
+        <!--[if lt IE 9]><script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+        
+
+<script type='text/javascript'>
+/* <![CDATA[*/
+var ishyoboy_fe_globals = {
+ 	IYB_RESPONSIVE: true,
+ 	IYB_BREAKINGPOINT: 768
+ 	}; 
+/* ]]> */ 
+ </script>
+
+
+<!-- This site is optimized with the Yoast SEO plugin v3.0.3 - https://yoast.com/wordpress/plugins/seo/ -->
+<link rel="canonical" href="index.html" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Making an event registration and checkin system using Meteor - Aaron Dancer" />
+<meta property="og:description" content="Making an event registration and checking system using Meteor 0&#046; What is Meteor? Meteor is a framework that allows you to quickly create real-time websites, web apps, mobile apps, and more all using full stack JavaScript! 1&#046; Installing Meteor Just go to https://www.meteor.com/install and follow the instructions! 2&#046; Hello World Creating your first app Let&#8217;s &hellip;" />
+<meta property="og:url" content="http://aarondancer.com/2015/11/20/making-event-registration-checkin-system-using-meteor/" />
+<meta property="og:site_name" content="Aaron Dancer" />
+<meta property="article:author" content="https://facebook.com/aaron7pm" />
+<meta property="article:section" content="Web Development" />
+<meta property="article:published_time" content="2015-11-20T16:49:57+00:00" />
+<meta property="article:modified_time" content="2015-11-23T19:03:17+00:00" />
+<meta property="og:updated_time" content="2015-11-23T19:03:17+00:00" />
+<meta property="og:image" content="https://i.imgur.com/jH7tvVX.png" />
+<meta property="og:image" content="https://i.imgur.com/3mJYIbo.png" />
+<meta property="og:image" content="https://i.imgur.com/UIaJNBL.png" />
+<meta property="og:image" content="https://i.imgur.com/zgC52mr.png" />
+<meta property="og:image" content="https://i.imgur.com/VW1SqJi.png" />
+<meta property="og:image" content="https://i.imgur.com/3AGq3zB.png" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:description" content="Making an event registration and checking system using Meteor 0&#046; What is Meteor? Meteor is a framework that allows you to quickly create real-time websites, web apps, mobile apps, and more all using full stack JavaScript! 1&#046; Installing Meteor Just go to https://www.meteor.com/install and follow the instructions! 2&#046; Hello World Creating your first app Let&#8217;s [&hellip;]"/>
+<meta name="twitter:title" content="Making an event registration and checkin system using Meteor - Aaron Dancer"/>
+<meta name="twitter:site" content="@aaron7pm"/>
+<meta name="twitter:image" content="https://i.imgur.com/jH7tvVX.png"/>
+<meta name="twitter:creator" content="@aaron7pm"/>
+<!-- / Yoast SEO plugin. -->
+
+<link rel="alternate" type="application/rss+xml" title="Aaron Dancer &raquo; Feed" href="../../../../feed/index.html" />
+<link rel="alternate" type="application/rss+xml" title="Aaron Dancer &raquo; Comments Feed" href="../../../../comments/feed/index.html" />
+<link rel="alternate" type="application/rss+xml" title="Aaron Dancer &raquo; Making an event registration and checkin system using Meteor Comments Feed" href="feed/index.html" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"http:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"http:\/\/aarondancer.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=2b34ee9cd4782edcd7592787beed56ec"}};
+			!function(a,b,c){function d(a){var c=b.createElement("canvas"),d=c.getContext&&c.getContext("2d");return d&&d.fillText?(d.textBaseline="top",d.font="600 32px Arial","flag"===a?(d.fillText(String.fromCharCode(55356,56812,55356,56807),0,0),c.toDataURL().length>3e3):(d.fillText(String.fromCharCode(55357,56835),0,0),0!==d.getImageData(16,16,1,1).data[0])):!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g;c.supports={simple:d("simple"),flag:d("flag")},c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.simple&&c.supports.flag||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='contact-form-7-css'  href='../../../../wp-content/plugins/contact-form-7/includes/css/styles1933.css?ver=2b34ee9cd4782edcd7592787beed56ec' type='text/css' media='all' />
+<link rel='stylesheet' id='ish-fe-shortcodes-css'  href='../../../../wp-content/plugins/ishyoboy-boldial-assets/ishyoboy-shortcodes/assets/frontend/css/shortcodes1933.css?ver=2b34ee9cd4782edcd7592787beed56ec' type='text/css' media='all' />
+<link rel='stylesheet' id='ish-fontello-css'  href='../../../../wp-content/themes/boldial/assets/frontend/css/ish-fontello1933.css?ver=2b34ee9cd4782edcd7592787beed56ec' type='text/css' media='all' />
+<link rel='stylesheet' id='ish-boldial-styles-css'  href='../../../../wp-content/themes/boldial/style1933.css?ver=2b34ee9cd4782edcd7592787beed56ec' type='text/css' media='all' />
+<link rel='stylesheet' id='ish-tooltipster-css'  href='../../../../wp-content/themes/boldial/assets/frontend/css/plugins/tooltipster1933.css?ver=2b34ee9cd4782edcd7592787beed56ec' type='text/css' media='all' />
+<link rel='stylesheet' id='main-options-css'  href='../../../../wp-content/uploads/boldial_css/main-options1933.css?ver=2b34ee9cd4782edcd7592787beed56ec' type='text/css' media='all' />
+<link rel='stylesheet' id='main-options-2-css'  href='../../../../wp-content/uploads/boldial_css/main-options_21933.css?ver=2b34ee9cd4782edcd7592787beed56ec' type='text/css' media='all' />
+<link rel='stylesheet' id='ish-fancybox-css'  href='../../../../wp-content/themes/boldial/assets/frontend/css/plugins/jquery.fancybox1933.css?ver=2b34ee9cd4782edcd7592787beed56ec' type='text/css' media='all' />
+<link rel='stylesheet' id='mediaelement-css'  href='../../../../wp-includes/js/mediaelement/mediaelementplayer.min1933.css?ver=2b34ee9cd4782edcd7592787beed56ec' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-mediaelement-css'  href='../../../../wp-includes/js/mediaelement/wp-mediaelement1933.css?ver=2b34ee9cd4782edcd7592787beed56ec' type='text/css' media='all' />
+<link rel='stylesheet' id='boldial-google-font-1-css'  href='http://fonts.googleapis.com/css?family=none%3A400%2C400italic%2Cregular%2Citalic%2C700%2C700italic%2Cregular%2C400%2C400italic%2Cregular%2Citalic%2C700%2C700italic%2Cregular%2C400%2C400italic%2Cregular%2Citalic%2C700%2C700italic%2C500%2C400%2C400italic%2Cregular%2Citalic%2C700%2C700italic%2C700%2C400%2C400italic%2Cregular%2Citalic%2C700%2C700italic%2C700%2C400%2C400italic%2Cregular%2Citalic%2C700%2C700italic%2C500%2C400%2C400italic%2Cregular%2Citalic%2C700%2C700italic%2C500%2C400%2C400italic%2Cregular%2Citalic%2C700%2C700italic%2C500%2C400%2C400italic%2Cregular%2Citalic%2C700%2C700italic%2C500%2C&amp;ver=2b34ee9cd4782edcd7592787beed56ec' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-markdown-prettify-css'  href='../../../../wp-content/plugins/wp-markdown/css/prettify1933.css?ver=2b34ee9cd4782edcd7592787beed56ec' type='text/css' media='all' />
+<link rel='stylesheet' id='sccss_style-css'  href='../../../../indexc07d.html?sccss=1&amp;ver=2b34ee9cd4782edcd7592787beed56ec' type='text/css' media='all' />
+<script type='text/javascript' src='../../../../wp-includes/js/jquery/jquery1933.js?ver=2b34ee9cd4782edcd7592787beed56ec'></script>
+<script type='text/javascript' src='../../../../wp-includes/js/jquery/jquery-migrate.min1933.js?ver=2b34ee9cd4782edcd7592787beed56ec'></script>
+<script type='text/javascript' src='../../../../wp-content/themes/boldial/assets/frontend/js/vendor/packery.pkgd.min1933.js?ver=2b34ee9cd4782edcd7592787beed56ec'></script>
+<script type='text/javascript' src='../../../../wp-content/themes/boldial/assets/frontend/js/vendor/imagesloaded.pkgd.min1933.js?ver=2b34ee9cd4782edcd7592787beed56ec'></script>
+<script type='text/javascript' src='../../../../wp-content/themes/boldial/assets/frontend/js/vendor/jquery.scrollTo-1.4.3.1-min1933.js?ver=2b34ee9cd4782edcd7592787beed56ec'></script>
+<script type='text/javascript' src='../../../../wp-content/plugins/wp-markdown/js/prettify.min1933.js?ver=2b34ee9cd4782edcd7592787beed56ec'></script>
+<script type='text/javascript' src='../../../../wp-content/plugins/wp-markdown/js/markdown.min1933.js?ver=2b34ee9cd4782edcd7592787beed56ec'></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../../xmlrpc0db0.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../../../../wp-includes/wlwmanifest.xml" /> 
+
+<link rel='shortlink' href='../../../../index4b47.html?p=6363' />
+<style type="text/css"></style>
+			<script type="text/javascript">
+				jQuery(document).ready(function($){
+					var thumbnails = jQuery("a:has(img)").not(".nolightbox").filter( function() { return /\.(jpe?g|png|gif|bmp)$/i.test(jQuery(this).attr('href')) });
+
+					if ( thumbnails.length > 0){
+						thumbnails.addClass( 'openfancybox-image' ).attr( 'rel', 'fancybox-post-image-6363');
+					}
+				});
+			</script>
+			<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<meta name="generator" content="Powered by Visual Composer - drag and drop page builder for WordPress."/>
+<!--[if lte IE 9]><link rel="stylesheet" type="text/css" href="http://aarondancer.com/wp-content/themes/boldial/wpbakery/js_composer/assets/css/vc_lte_ie9.css" media="screen"><![endif]--><!--[if IE  8]><link rel="stylesheet" type="text/css" href="http://aarondancer.com/wp-content/themes/boldial/wpbakery/js_composer/assets/css/vc-ie8.css" media="screen"><![endif]--><script type="text/javascript">
+(function(url){
+	if(/(?:Chrome\/26\.0\.1410\.63 Safari\/537\.31|WordfenceTestMonBot)/.test(navigator.userAgent)){ return; }
+	var addEvent = function(evt, handler) {
+		if (window.addEventListener) {
+			document.addEventListener(evt, handler, false);
+		} else if (window.attachEvent) {
+			document.attachEvent('on' + evt, handler);
+		}
+	};
+	var removeEvent = function(evt, handler) {
+		if (window.removeEventListener) {
+			document.removeEventListener(evt, handler, false);
+		} else if (window.detachEvent) {
+			document.detachEvent('on' + evt, handler);
+		}
+	};
+	var evts = 'contextmenu dblclick drag dragend dragenter dragleave dragover dragstart drop keydown keypress keyup mousedown mousemove mouseout mouseover mouseup mousewheel scroll'.split(' ');
+	var logHuman = function() {
+		var wfscr = document.createElement('script');
+		wfscr.type = 'text/javascript';
+		wfscr.async = true;
+		wfscr.src = url + '&r=' + Math.random();
+		(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(wfscr);
+		for (var i = 0; i < evts.length; i++) {
+			removeEvent(evts[i], logHuman);
+		}
+	};
+	for (var i = 0; i < evts.length; i++) {
+		addEvent(evts[i], logHuman);
+	}
+})('../../../../indexf6d5.html?wordfence_logHuman=1&amp;hid=FF2646E9C584C85FEEDB83A36789BD8B');
+</script><noscript><style> .wpb_animate_when_almost_visible { opacity: 1; }</style></noscript>        <!--[if IE 8]><link rel="stylesheet" href="http://aarondancer.com/wp-content/themes/boldial/assets/frontend/css/ie8.css"><![endif]-->
+
+    </head>
+
+
+
+    <body class="single single-post postid-6363 single-format-standard ish-unboxed ish-responsive_layout_on ish-sticky-on  wpb-js-composer js-comp-ver-4.7.4 vc_responsive">
+
+        
+
+
+        <div class="ish-body">
+
+		    <!-- Expandable part section -->
+		    		    <!-- Expandable part section END -->
+
+
+		    <!-- Search bar -->
+		    <section class="ish-part_searchbar ish-a-search">
+			    <div>
+				    <form role="search" method="get" id="headersearchform" action="http://aarondancer.com/">
+    <label>
+        <input type="text" value="" name="s" id="s" autocomplete="off" placeholder="Search ...">
+    </label>
+</form>
+
+<a href="#close" class="ish-ps-searchform_close ish-icon-cancel" title="Close Search (ESC)"></a>			    </div>
+		    </section>
+		    <!-- Search bar END -->
+
+
+		    <!-- Wrap whole page -->
+		    <div class="ish-wrapper-all">
+
+		        <!-- Header part section -->
+			    <section class="ish-part_header">
+				    <div class="ish-row ish-row-notfull">
+					    <div class="ish-row_inner">
+
+
+
+						    <!-- Logo image / text -->
+														    <a class="ish-ph-logo" href="../../../../index.html">
+								    <span>
+									    Aaron Dancer								    </span>
+							    </a>
+						    
+						    <!-- Default WordPress tagline -->
+						    
+						    <!-- Main navigation -->
+						    <nav class="ish-ph-main_nav">
+							    		<ul id="mainnav" class="ish-ph-mn-main_nav ish-nt-regular"><li id="menu-item-4901" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4901"><a href="../../../../index.html#">Home</a></li>
+<li id="menu-item-4411" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4411"><a href="../../../../index.html#about">About</a></li>
+<li id="menu-item-4541" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4541"><a href="../../../../index.html#portfolio">Portfolio</a></li>
+<li id="menu-item-4491" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4491"><a href="../../../../index.html#contact">Contact</a></li>
+<li id="menu-item-3151" class="menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-3151"><a href="../../../../blog/index.html">Blog</a></li>
+<li class="ish-ph-mn-search"><a href="#search" class="ish-icon-search"></a></li></ul>
+							    <!-- Responsive or sidenav navigation -->
+							    		<ul class="ish-ph-mn-resp_nav ish-ph-mn-hidden">
+			<!-- Resp menu button -->
+							<li class="ish-ph-mn-resp_menu"><a href="#respnav" class="ish-icon-menu"></a></li>
+			
+			<!-- Search button if enabled -->
+							<li class="ish-ph-mn-search"><a href="#search" class="ish-icon-search"></a></li>
+			
+			<!-- Expandable button if enabled -->
+			
+					</ul>
+		
+						    </nav>
+						</div>
+					</div>
+				</section>
+		        <!-- Header part section END -->
+
+<div class="ish-part_tagline ish-tagline_title ish-tagline-colored"><div class="ish-row ish-row-notfull"><div class="ish-row_inner"><h1>Making an event registration and checkin system using Meteor</h1>		<span class="ish-blog-post-details">
+					<a href="../index.html">November 20, 2015</a>
+							<span>by</span> <a href="../../../../author/aarondancer/index.html" title="Posts by aarondancer" rel="author">aarondancer</a>										<span>in category</span> <a href="../../../../category/web-development/index.html" rel="category tag">Web Development</a>													with <a href="index.html#comments"><i class="ish-icon-chat"></i>0</a>
+				and <a class="ish-likes" href="#" id="ish-likes-6363" title="Like"><i class="ish-icon-heart"></i><span class="ish-likes-count">0</span></a>			
+		</span>
+		</div></div></div>
+
+			<div class="ish-part_breadcrumbs">
+				<div class="ish-row ish-row-notfull">
+					<div class="ish-row_inner"><div class="ish-pb-breadcrumbs"><div><div>
+<a class="ish-pb-breadcrumbs-home" href="../../../../index.html"><span>Home</span></a> &gt; <a href="../../../../blog/index.html" title="View Blog page">Blog</a> &gt; <a href="../../../../category/web-development/index.html">Web Development</a> &gt; Making an event registration and checkin system using Meteor</div></div></div></div></div></div>
+	<!-- Content part section -->
+	<section class="ish-part_content ish-without-sidebar">
+
+					<div class="wpb_row vc_row-fluid ish-row-notfull ish-row_notsection"><div class="ish-vc_row_inner"><h1>Making an event registration and checking system using Meteor</h1>
+<h2>0&#46; What is Meteor?</h2>
+<p>Meteor is a framework that allows you to quickly create real-time websites, web apps, mobile apps, and more all using full stack JavaScript!</p>
+<h2>1&#46; Installing Meteor</h2>
+<p>Just go to https://www.meteor.com/install and follow the instructions!</p>
+<h2>2&#46; Hello World</h2>
+<h3>Creating your first app</h3>
+<p>Let&#8217;s create our first app in Meteor! To save time, let&#8217;s go ahead and name it &#8216;hackathon-system&#8217; so we can recycle the project when we&#8217;re done.</p>
+<p>To create a new app in Meteor, just open up your Terminal or Powershell and type the following: <code>meteor create hackathon-system</code></p>
+<p>That will create a new folder called <code>hackathon-system</code> with the following files inside of it:</p>
+<p><code>hackathon-system.js<br />
+hackathon-system.html<br />
+hackathon-system.css<br />
+.meteor</code></p>
+<h3>Running your first app</h3>
+<p>Let&#8217;s go ahead and run our newly generated app by typing: <code>cd hackathon-system<br />
+meteor</code></p>
+<p>Once it&#8217;s done loading, visit http://localhost:3000 and you&#8217;ll see a screen like this show up:</p>
+<p><img src="../../../../../i.imgur.com/jH7tvVX.png" alt="" /></p>
+<p>Click the <code>Click Me</code> button and you&#8217;ll notice the number increments. There&#8217;s nothing really magical about this, this is just the Blaze templating engine doing some basic JavaScript.</p>
+<h2>3&#46; Setting up the view</h2>
+<p>With Blaze, views are made with HTML and custom tags that the Blaze will recognize. Go ahead and open up your <code>hackathon-system.html</code> file and make add the following changes:</p>
+<p>Change <code>&lt;title&gt;hackathon-system&lt;/title&gt;</code> to <code>&lt;title&gt;Hackathon System&lt;/title&gt;</code></p>
+<p>Remove everything inside <code>&lt;body&gt;...&lt;/body&gt;</code> and <code>&lt;template name="hello&gt;...&lt;/template&gt;</code></p>
+<p>Now add a header inside <code>&lt;body&gt;</code> like so:</p>
+<p><code>&lt;body&gt;<br />
+    &lt;header&gt;<br />
+        &lt;h1&gt;Hackathon System&lt;/h1&gt;<br />
+    &lt;/header&gt;<br />
+&lt;/body&gt;</code></p>
+<h2>4&#46; Display attendees</h2>
+<h3>Creating the template</h3>
+<p>The first thing we need to do in order to display attendees is to create a template for attendees. This template will define how every attendee will be displayed on the screen.</p>
+<p>Change <code>name="hello"</code> to <code>name="attendee"</code> in <code>&lt;template&gt;</code>. This will be our attendee template.</p>
+<p>Now we define the template&#8217;s content:</p>
+<p><code>&lt;template name="attendee"&gt;<br />
+    &lt;div&gt;<br />
+        &lt;div&gt;{{status}}&lt;/div&gt;<br />
+        &lt;div&gt;&lt;b&gt;{{name}}&lt;b&gt;&lt;/div&gt;<br />
+        &lt;div&gt;{{email}}&lt;/div&gt;<br />
+    &lt;/div&gt;<br />
+&lt;/template&gt;</code></p>
+<p>In short, what we just did was have the template display the status, name, and email of the attendee, wrapped within a div container.</p>
+<h3>Displaying the template</h3>
+<p>Now that we have the template, we need to tell the view to display the template for every attendee that exists. We do this by adding the following before the header we made earlier:</p>
+<p><code>&lt;div&gt;<br />
+    {{#each attendees}}<br />
+        {{&gt; attendee}}<br />
+    {{/each}}<br />
+&lt;/div&gt;</code></p>
+<h3>Sample Data</h3>
+<p>Now if you load up the app, you&#8217;ll notice that it&#8217;s empty! Why? because there&#8217;s no attendees to pull from! Let&#8217;s go ahead and add some attendees. We&#8217;ll just hardcode this into the client for now.</p>
+<p>Open up your <code>hackathon-system.js</code> file and add delete everything inside the <code>if (meteor.isClient) {...}</code> brackets.</p>
+<p>Now, add the following:</p>
+<p><code>Template.body.helpers({<br />
+        attendees: [<br />
+            { name: 'Bob Jones', email: 'bob@jones.com', status: 'Checked-in'},<br />
+            { name: 'Tiffany Williams', email:'tiff@any.com', status: 'Registered' }<br />
+        ]<br />
+    });</code></p>
+<p>What we just did is insert code into the client (the browser) that gives the body access to the hardcoded attendees array we created inside it. In that array we created two JavaScript objects with a name and email.</p>
+<p>Now, go back to your Meteor app and you&#8217;ll see that your code has magically been updated to show the two attendees you just hardcoded in!</p>
+<p><img src="../../../../../i.imgur.com/3mJYIbo.png" alt="" /></p>
+<p>Go ahead and try renaming someone or changing an email. You&#8217;ll notice that it gets updated automagically. This is thanks to Meteor&#8217;s hot-reload.</p>
+<p>You have successfully displayed your attendees using Blaze! Now let&#8217;s make it prettier.</p>
+<h2>5&#46; Making it prettier</h2>
+<h3>Installing Bootstrap</h3>
+<p>One of the easiest ways to get your apps looking decent quickly is to use a front-end framework called Bootstrap. In order for us to use Bootstrap, you&#8217;ll get to witness the magic of the Meteor package system.</p>
+<p>All you have to do to install Bootsrap into Meteor is type this into your console: <code>meteor add twbs:bootstrap</code></p>
+<p>That&#8217;s it!</p>
+<h3>Adding some formatting and classes</h3>
+<p>In order to style and structure a view properly, you need to use classes.</p>
+<p>Let&#8217;s wrap everything inside the body with a <code>&lt;div&gt;</code> that has the Bootstrap <code>container</code> class. What this class will do is wrap what we have into a padded container. The result should look similar to this:</p>
+<p><code>&lt;div class="container"&gt;<br />
+    &lt;header&gt;<br />
+        ...<br />
+    &lt;/header&gt;<br />
+    &lt;div&gt;<br />
+        ...<br />
+    &lt;/div&gt;<br />
+&lt;/div&gt;</code></p>
+<p>Now, let&#8217;s format the attendees to where they show up as cards in a grid format. I won&#8217;t be doing much explaining about the Bootstrap grid here, if you want to learn it in detail visit here: http://getbootstrap.com/css/#grid</p>
+<p>First we need to edit the template. I so that each card has a defined width. For the <code>&lt;div&gt;</code> tag inside, we&#8217;ll add some classes like so:</p>
+<p><code>&lt;div class="col-xs-6 col-sm-4 col-md-3 col-lg-2"&gt;<br />
+    ...<br />
+&lt;/div&gt;</code></p>
+<p>These classes basically defines the <code>&lt;div&gt;</code> as a container that determines how wide each card should be depending on screen width.</p>
+<p>Now we need to wrap everything we have with a <code>&lt;div&gt;</code> that will act as the styling layer of the card:</p>
+<p><code>&lt;div class="col-xs-6 col-sm-4 col-md-3 col-lg-2"&gt;<br />
+    &lt;div class="card"&gt;<br />
+        ...<br />
+    &lt;/div&gt;<br />
+&lt;/div&gt;</code></p>
+<p>Now to finish off the attendee grid, we need to go back into our body and edit the <code>&lt;div&gt;</code> below the <code>&lt;body&gt;</code> and tell it to wrap all of the templates by giving it the <code>row</code> class:</p>
+<p><code>&lt;header&gt;<br />
+    ...<br />
+&lt;/header&gt;<br />
+&lt;div class="row"&gt;<br />
+    ...<br />
+&lt;/div&gt;</code></p>
+<p>Now if you look at the page, you&#8217;ll notice that the attendees will be aligned and spaced out, but they don&#8217;t quite look like cards yet.</p>
+<h3>Adding some custom styling</h3>
+<p>Let&#8217;s add some basic custom styling to make the attendees look like cards. Open up your <code>hackthon-system.css</code> file and type the following:</p>
+<p><code>.card {<br />
+    padding: 16px;<br />
+    border: 1px solid #ccc;<br />
+    border-radius: 8px;<br />
+    margin: 8px;<br />
+    width: 100%;<br />
+}</code></p>
+<p>This should style the cards to look like this: <img src="../../../../../i.imgur.com/UIaJNBL.png" alt="" /></p>
+<p>Not bad eh? But how about we make the status more prominent?</p>
+<h3>Status Tag</h3>
+<p>Go back to your template and edit the status tag to look like this:</p>
+<p><code>&lt;div class="card"&gt;<br />
+    &lt;div class="{{status}} status"&gt;<br />
+        {{status}}<br />
+    &lt;/div&gt;<br />
+    ...<br />
+&lt;/div&gt;</code></p>
+<p>Woah. Okay. There&#8217;s Blaze tags in the class? Yep! You can do that. That&#8217;s how we&#8217;ll make the tag change color based on the status. I also added a plain <code>status</code> tag to act as the base styling.</p>
+<p>Now let&#8217;s add some custom CSS:</p>
+<p>&#96;<code>\</code> .card .status { border: 1px solid #ccc; border-radius: 4px; padding: 2px; background: #eee; padding-left: 8px; }</p>
+<p>.card .Checked-in { border-color: #0a0; background: #8c8; }</p>
+<p>.card .Registered { border-color: #a90; background: #fe9; } &#96;<code>\</code></p>
+<p>So we have our base <code>status</code> styling, then styles for <code>Checked-in</code> and <code>Registered</code>.</p>
+<p>Let&#8217;s see how it looks: <img src="../../../../../i.imgur.com/zgC52mr.png" alt="" /></p>
+<p>Pretty spiffy!</p>
+<h2>6&#46; Registering someone</h2>
+<p>Okay okay, that&#8217;s enough making it pretty. Let&#8217;s get coding. We&#8217;ve hardcoded attendees, let&#8217;s make this for real and have it pull data from the server.</p>
+<h3>Defining a collection</h3>
+<p>Remember that array of attendees we made earlier? That was our attendee collection, but it was only available to the client. We need to make a collection that&#8217;s available to the server and the client like so:</p>
+<p>&#96;<code>\</code> Attendees = new Mongo.Collection(&#8220;attendees&#8221;);</p>
+<p>if (Meteor.isClient) { Template.body.helpers({ attendees: function () { return Attendees.find({}); } } } &#96;<code>\</code></p>
+<p>So what did we do? We created a MongoDB collection outside of the Client and Server scope. This makes the collection global to both the Client and Server code. Then we modified the helper to just return the <code>Attendees</code> collection we made to the client.</p>
+<h3>Adding an attendee manually</h3>
+<p>Now, let&#8217;s try manually entering in some data into our databse. Access the MongoDB console by going into your terminal and typing: <code>meteor mongo</code></p>
+<p>Then, run this query to insert a new attendee into the database: <code>db.attendees.insert({ name: 'Richard Hillary', email: 'rich@one.com', status: 'Registered' });</code></p>
+<p>Basically you&#8217;re just inserting an attendee object, similar to the ones you hardcoded before into the <code>attendees</code> collection in the database.</p>
+<p>Now, if you look at your app you should see your new attendee!</p>
+<p><img src="../../../../../i.imgur.com/VW1SqJi.png" alt="" /></p>
+<h3>Adding a form</h3>
+<p>Alright alright, so maybe we need a button. We&#8217;ll also need some fields for people to enter their information. Go back into your html and add the following above <code>&lt;div class="row"&gt;</code>:</p>
+<p><code>&lt;form class="register form-inline"&gt;<br />
+    &lt;div class="form-group"&gt;<br />
+        &lt;input class="form-control" type="text" name="name" placeholder="Name"&gt;<br />
+        &lt;input class="form-control" type="email" name="email" placeholder="Email"&gt;<br />
+        &lt;button class="btn btn-primary" type="submit"&gt;Register&lt;/button&gt;<br />
+    &lt;/div&gt;<br />
+&lt;/form&gt;</code></p>
+<p>This code creates a form, two fields, and a submit button. We identify the form by its <code>register</code> class. It should look like this:</p>
+<p><img src="../../../../../i.imgur.com/3AGq3zB.png" alt="" /></p>
+<p>Now that we have our form, let&#8217;s have that form add that person to the database when they click <code>Register</code></p>
+<p>Within <code>if (Meteor.isClient) {...}</code> type out the following:</p>
+<p>&#96;<code>\</code> Template.body.events({ &#8220;submit .register&#8221;: function (event) { //Prevent the page from reloading event.preventDefault();</p>
+<pre><code>    var name = event.target.name.value;
+    var email = event.target.email.value;
+
+    Attendees.insert({
+        name: name,
+        email: email,
+        status: 'Registered'
+    })
+
+    //Clear the text boxes
+    event.target.name.value = "";
+    event.target.email.value = "";
+}
+</code></pre>
+<p>}) &#96;<code>\</code></p>
+<p>This code will take what&#8217;s inputed in the textboxes and create a new registered attendee in the database.</p>
+<p>Try to add someone! You&#8217;ll notice that person will instantly show up on the screen and in the database.</p>
+<h3>Basic Validation</h3>
+<p>Wait a minute, if you try to add someone with a blank field, it works. You can also add duplicate people. We should check to see if the fields are blank and if the email already exists.</p>
+<p>Checking if fields are empty is actually really easy to do. All you have to do is wrap the insert and clear text code with a conditional that checks if the value of the fields are empty.</p>
+<p>&#96;<code>\</code> if (name !== &#8220;&#8221; &amp;&amp; email !== &#8220;&#8221;) { Attendees.insert({ name: name, email: email, status: &#8216;Registered&#8217; })</p>
+<pre><code>event.target.name.value = "";
+event.target.email.value = "";
+</code></pre>
+<p>} &#96;<code>\</code></p>
+<p>Now let&#8217;s implement a check to see if an email already exists:</p>
+<p><code>if (Attendees.find({ email: email }).count() &gt; 0) {<br />
+    return<br />
+}</code></p>
+<p>All we do is search for attendees with the same email and get a count of how many matches there are.</p>
+<h2>7&#46; Checking someone in</h2>
+<p>Now that registration is working, and we have some basic validation, let&#8217;s get someone checked in.</p>
+<p>How about rather than making a separate button to check someone in, you just click their status to check in and out!</p>
+<p>This is pretty simple:</p>
+<p>&#96;<code>\</code> &#8220;submit .register&#8221;: function (event) { &#8230; }, // &lt;&#8211; Make sure you add a comma</p>
+<p>&#8220;click .status&#8221;: function () { Attendees.update(this._id, { $set: {status: (this.status === &#8220;Registered&#8221;) ? &#8220;Checked-in&#8221; : &#8220;Registered&#8221;} }); } &#96;<code>\</code></p>
+<p>Now click the statuses and you&#8217;ll notice they&#8217;ll toggle! Pretty easy eh?</p>
+<h2>9&#46; Hiding checked-in people</h2>
+<p>What if we want to hide the attendees that are checked in?</p>
+<p>Let&#8217;s add a checkbox below our form:</p>
+<p><code>&lt;input type="checkbox" name="toggle-checked-in" class="toggle-checked-in" checked="{{hideCheckedIn}}"&gt;<br />
+&lt;label for="toggle-checked-in"&gt;Toggle checked in&lt;/label&gt;</code></p>
+<p>What this checkbox will do is set its checked state to the <code>hideCheckedIn</code> session variable.</p>
+<p>Now, let&#8217;s add the logic. Add another event, this time for the <code>change</code> event on the checkbox:</p>
+<p><code>"change .toggle-checked-in": function(event) {<br />
+      Session.set("hideCheckedIn", event.target.checked);<br />
+}</code></p>
+<p>This will toggle the <code>hideCheckedIn</code> variable.</p>
+<p>Now, in the helpers add a hideCheckedIn helper that returns the session variable:</p>
+<p><code>attendees: function () {<br />
+      ...<br />
+},<br />
+hideCheckedIn: function() {<br />
+      return Session.get("hideCheckedIn");<br />
+}</code></p>
+<p>But, if you check the box you&#8217;ll notice that the checked-in people don&#8217;t hide. We&#8217;ll need to tell the attendees helper to filter out those people if the checkbox is checked:</p>
+<p><code>if (Session.get("hideCheckedIn")) {<br />
+    return Attendees.find({status: 'Registered'});<br />
+}<br />
+return Attendees.find({});</code></p>
+<h2>9&#46; User Accounts</h2>
+<p>Now, we don&#8217;t want this to be accessible by anyone right? Let&#8217;s only allow logged in people to register and check in people. But how do we do that? Well in Meteor it&#8217;s simple!</p>
+<p>First install the <code>accounts-ui</code> and <code>accounts-password</code> packages:</p>
+<p><code>meteor add accounts-ui accounts-password</code></p>
+<p>Then, above our form add the following code to add a login dropdown above our form:</p>
+<p><code>{{&gt; loginButtons}}</code></p>
+<p>Let&#8217;s also have it require a username instead of an email by placing this at the bottom of the Meteor client:</p>
+<p><code>Accounts.ui.config({<br />
+    passwordSignupFields: "USERNAME_ONLY"<br />
+});</code></p>
+<p>Now we need to add some validation that tells your code to stop and throw an error if the user isn&#8217;t logged in. Add this inside all of your events:</p>
+<p><code>if (!Meteor.userId()) {<br />
+    throw new Meteor.Error("not-authorized")<br />
+}</code></p>
+<p>But this isn&#8217;t enough, users can still see the fields and attendees. We can hide all of that by wrapping it all in the following tags.</p>
+<p><code>{{#if currentUser}}<br />
+{{/if}}</code></p>
+<h2>10&#46; Security</h2>
+<p>Now that we have authentication, we need to make sure our app is actually secure. By default Meteor is insecure, and we need to make some changes to our code.</p>
+<p>First, we need to remove the unsubscribe package:</p>
+<p><code>meteor remove insecure</code> This prevents people from executing MongoDB queries from the client.</p>
+<p>Next, we need to move modifying queries out of the client and into the server. We do this by declaring <code>Meteor.methods</code>.</p>
+<p>Below the server contitional, add another block for <code>Meteor.methods</code> like so:</p>
+<p>&#96;<code>\</code> Meteor.methods({</p>
+<p>}); &#96;<code>\</code></p>
+<p>Let&#8217;s start moving our methods. Move all of the validation and queries in <code>register</code> to a new <code>register</code> method in <code>Meteor.methods</code>:</p>
+<p><code>Meteor.methods({<br />
+    register: function(name, email) {<br />
+        if (!Meteor.userId()) {<br />
+        throw new Meteor.Error("not-authorized")<br />
+        }<br />
+        Attendees.insert({<br />
+            name: name,<br />
+            email: email,<br />
+            status: 'Registered'<br />
+        })<br />
+    }<br />
+});</code></p>
+<p>Now, just do the same for the check-in event.</p>
+<h2>11&#46; Deploy to Meteor</h2>
+<p>Believe it or not, we have a fully functioning app!</p>
+<p>You can deploy your app using the command: <code>meteor deploy your_app_name.meteor.com</code></p>
+<p>Then you can visit it at https://your_app_name.meteor.com</p>
+<p>It&#8217;s completely free! Just not that this is only good for testing, Meteor will shutdown inactive sites and there&#8217;s no control over hosting.</p>
+<h2>12&#46; What&#8217;s next?</h2>
+<p>This app was made to demonstrate the basic capabilities of Meteor. The app&#8217;s architecture completely ignores Meteor&#8217;s awesome user accounts API for the sake of getting down some basic concepts.</p>
+<p>Things to work on:</p>
+<ul>
+<li>Remove auto-publish. Use publish and subscribe instead.</li>
+<li>Make it a multipage app!</li>
+<li>Make it mobile!</li>
+<li>Deploy to a real production environment (like Azure)</li>
+</ul>
+</div></div>				<div class="wpb_row vc_row-fluid ish-row-notfull ish-row_notsection">
+					<div class="ish-vc_row_inner">
+											</div>
+				</div>
+				<div class="wpb_row vc_row-fluid ish-row-notfull ish-row_notsection">
+					<div class="ish-vc_row_inner">
+						<div class="ish-single_post_navigation"> <div class="blog-prev-link"><a class="ish-sc_button ish-color2 ish-text-color3" href="../../../08/16/accessing-environment-variables-on-an-azure-web-app-in-php/index.html">Older Article &gt;</a></div></div>					</div>
+				</div>
+
+				<div class="wpb_row vc_row-fluid ish-row-notfull ish-row_notsection"><div class="ish-vc_row_inner">
+    <div class="ish-comments-form">
+        								<h2 class="ic"><h3 class="ish-add-comment-headline ish-icon-pencil" id="respond">Add comment</h3></h2>
+			<p><a rel="nofollow" id="cancel-comment-reply-link" href="index.html#respond" style="display:none;">Cancel a reply</a></p>
+							<form action="http://aarondancer.com/wp-comments-post.php" method="post" id="commentform" class="validate clearfix">
+																<div class="ish-grid4">
+														<p><label><input type="text" placeholder="Your name *" class="required" name="author" id="author" value="" aria-required='true'></label></p>
+<p><label><input type="text" placeholder="Your email *" class="email required" name="email" id="email" value="" aria-required='true'></label></p>
+<p><label><input type="text" placeholder="Your web page" name="url" id="url" value=""></label></p>
+						</div>
+					
+										<div class="ish-grid8">
+												<p><label for="comment"><textarea class="required" placeholder="Your comment *" name="comment" id="comment" aria-required="true"></textarea></label></p>
+												<div>
+															<p class="right">								<input name="submit" type="submit" id="submit" value="Send" class="btn-big" />
+								</p>							</div>
+							<input type='hidden' name='comment_post_ID' value='6363' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+
+																											</div>
+									</form>
+									    </div>
+
+</div></div>
+						
+	</section>
+	<!-- Content part section END -->
+
+	            
+	            	                <!-- Footer legals part section -->
+	                <section class="ish-part_legals">
+
+		                <div class="ish-row ish-row-notfull">
+			                <div class="ish-row_inner">
+		                        <p style="text-align: center;">Made with &hearts; in Houston</p>				            </div>
+	                    </div>
+
+	                </section>
+	                <!-- Footer legals part section END -->
+	            
+
+
+			</div>
+			<!-- Wrap whole page - boxed / unboxed END -->
+
+
+	        <a href="#top" class="ish-back_to_top ish-smooth_scroll ish-icon-up-open"></a>
+
+		</div>
+		<!-- ish-body END -->
+
+
+        <!--[if lte IE 8]><script src="http://aarondancer.com/wp-content/themes/boldial/assets/frontend/js/ie8.js"></script><![endif]-->
+
+
+        
+        <script type='text/javascript' src='../../../../wp-includes/js/comment-reply.min1933.js?ver=2b34ee9cd4782edcd7592787beed56ec'></script>
+<script type='text/javascript' src='../../../../wp-content/plugins/contact-form-7/includes/js/jquery.form.mind59f.js?ver=2b34ee9cd4782edcd7592787beed56ec-2014.06.20'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var _wpcf7 = {"loaderUrl":"http:\/\/aarondancer.com\/wp-content\/plugins\/contact-form-7\/images\/ajax-loader.gif","sending":"Sending ...","cached":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../../wp-content/plugins/contact-form-7/includes/js/scripts1933.js?ver=2b34ee9cd4782edcd7592787beed56ec'></script>
+<script type='text/javascript' src='../../../../wp-content/plugins/ishyoboy-boldial-assets/ishyoboy-shortcodes/assets/frontend/js/ishyoboy-shortcodes1933.js?ver=2b34ee9cd4782edcd7592787beed56ec'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var php_array = {"admin_ajax":"http:\/\/aarondancer.com\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../../wp-content/plugins/ishyoboy-boldial-assets/ishyoboy-widgets/assets/frontend/js/widgets1933.js?ver=2b34ee9cd4782edcd7592787beed56ec'></script>
+<script type='text/javascript' src='../../../../wp-content/themes/boldial/assets/frontend/js/vendor/jquery.smoothscroll.min.js'></script>
+<script type='text/javascript' src='../../../../wp-content/themes/boldial/assets/frontend/js/vendor/jquery.fancybox.pack.js'></script>
+<script type='text/javascript' src='../../../../wp-content/themes/boldial/assets/frontend/js/vendor/ish_jquery.tooltipster.min.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var iyb_globals = {"admin_ajax":"http:\/\/aarondancer.com\/wp-admin\/admin-ajax.php","js_uri":"http:\/\/aarondancer.com\/wp-content\/themes\/boldial\/assets\/frontend\/js","header_height":"100","sticky_height":"50","colors":{"color1":"#494c43","color2":"#acaea9","color3":"#f9f9f9","color4":"#ffffff","color5":"#fc4b4b","color6":"#75a7c0","color7":"#eb7244","color8":"#98bb56","color9":"#f45e78","color10":"#8b6c93","color11":"#ee5454","color12":"#9D7136","color13":"#dedede","color14":"#81dbda","color15":"#7a7a7a","color16":"#ffffff","color17":"#ffffff","color18":"#ffffff","color19":"#ffffff","color20":"#ffffff"}};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../../../wp-content/themes/boldial/assets/frontend/js/main.js'></script>
+
+		
+	</body>
+
+
+<!-- Mirrored from aarondancer.com/2015/11/20/making-event-registration-checkin-system-using-meteor/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 07 Sep 2016 15:02:33 GMT -->
+</html>
+<!-- Dynamic page generated in 2.427 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2015-11-24 12:02:45 -->
+
+<!-- super cache -->
