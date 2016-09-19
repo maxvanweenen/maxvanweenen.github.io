@@ -81,6 +81,7 @@ img.emoji {
 <link rel='stylesheet' id='js_composer_front-css'  href='wp-content/themes/boldial/wpbakery/js_composer/assets/css/js_composer1933.css?ver=2b34ee9cd4782edcd7592787beed56ec' type='text/css' media='all' />
 <link rel='stylesheet' id='sccss_style-css'  href='indexc07d.html?sccss=1&amp;ver=2b34ee9cd4782edcd7592787beed56ec' type='text/css' media='all' />
 <script type='text/javascript' src='wp-includes/js/jquery/jquery1933.js?ver=2b34ee9cd4782edcd7592787beed56ec'></script>
+<script type='text/javascript' src='js/formjs.js'></script>
 <script type='text/javascript' src='wp-includes/js/jquery/jquery-migrate.min1933.js?ver=2b34ee9cd4782edcd7592787beed56ec'></script>
 <script type='text/javascript' src='wp-content/themes/boldial/assets/frontend/js/vendor/packery.pkgd.min1933.js?ver=2b34ee9cd4782edcd7592787beed56ec'></script>
 <script type='text/javascript' src='wp-content/themes/boldial/assets/frontend/js/vendor/imagesloaded.pkgd.min1933.js?ver=2b34ee9cd4782edcd7592787beed56ec'></script>
@@ -609,7 +610,8 @@ During the training the participants:
 		<div class="wpb_wrapper">
 			<div class="span9">
         
-        	<form id="contactme" method="post" action="maxvanweenen.github.io/wp-content/plugins/contact-form-7/includes/php/contact.php ">
+        	
+			<form id="contact-form" class="contact-form" action="#">
             	<p class="contact-name">
             		<input id="contact_name" type="text" placeholder="Your Name (required)" value="" name="name" />
                 </p>
@@ -621,7 +623,7 @@ During the training the participants:
                 </p>
 				
                 <p class="contact-submit">
-                	<a id="contact-submit" class="ish-sc-element ish-sc_button ish-medium ish-color5 ish-text-color3" href="#">Send</a>
+                	<a id="contact-submit" class="submit" href="#">Send</a>
                 </p>
                 
                 <div id="response">
