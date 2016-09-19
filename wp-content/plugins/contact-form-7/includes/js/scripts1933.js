@@ -443,7 +443,7 @@
   
   $.ajax({
    type: "POST",
-   url: "_include/php/contact.php",
+   url: "maxvanweenen.github.io/wp-content/plugins/contact-form-7/includes/php/contact.php",
    data: fields,
    dataType: 'json',
    success: function(response) {
